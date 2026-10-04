@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin - Add Accounts</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>body{font-family:sans-serif;background:#111;color:#fff;padding:15px}input{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:none}button{background:#25D366;padding:12px;border:none;border-radius:8px;font-weight:bold;width:100%}</style>
+</head><body>
+<h2>Admin Panel - Add Accounts</h2>
+<input id="title" placeholder="Title e.g TikTok 10k followers">
+<input id="price" placeholder="Price e.g 15000" type="number">
+<input id="details" placeholder="Details e.g @Mr_musky - US logs">
+<button onclick="addAccount()">Add To Store</button>
+<p id="msg"></p>
+<a href="index.html" style="color:#25D366">Go to Buyer Store -></a>
+<script>
+const supabaseClient = supabase.createClient("https://witzmdmmhnahwthswfob.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndpdHptZG1taG5haHd0aHN3Zm9iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTExMTQ1OTksImV4cCI6MjEwNjY5MDU5OX0.ixCHE3Edy3u_fbIEFjES0_bbCicKPzUOC0Iu8OPM8tw");
+async function addAccount(){
+ let t=document.getElementById('title').value,p=document.getElementById('price').value,d=document.getElementById('details').value;
+ let {error}=await supabaseClient.from('accounts').insert([{title:t,price:p,details:d}]);
+ document.getElementById('msg').innerText = error ? error.message : "✅ Added! Go check index.html";
+}
+</script></body></html>
